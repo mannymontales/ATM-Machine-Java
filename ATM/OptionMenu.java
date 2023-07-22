@@ -11,6 +11,40 @@ public class OptionMenu {
 	DecimalFormat moneyFormat = new DecimalFormat("'$'###,##0.00");
 	HashMap<Integer, Account> data = new HashMap<Integer, Account>();
 
+	public void mainMenu() throws IOException {
+		data.put(952141, new Account(952141, 191904, 1000, 5000));
+		data.put(123, new Account(123, 123, 20000, 50000));
+		data.put(1234, new Account(1234, 1, 20000, 50000));
+		//data.put(12345, new Account(12345,02, 20000.00));
+		boolean end = false;
+		while (!end) {
+			try {
+				System.out.println("\n Type 1 - Login");
+				System.out.println(" Type 2 - Create Account");
+				System.out.print("\nChoice: ");
+				int choice = menuInput.nextInt();
+				switch (choice) {
+					case 1:
+						getLogin();
+						end = true;
+						break;
+					case 2:
+						createAccount();
+						end = true;
+						break;
+					default:
+						System.out.println("\nInvalid Choice.");
+				}
+			} catch (InputMismatchException e) {
+				System.out.println("\nInvalid Choice.");
+				menuInput.next();
+			}
+		}
+		System.out.println("\nThank You for using this ATM.\n");
+		menuInput.close();
+		System.exit(0);
+	}
+
 	public void getLogin() throws IOException {
 		boolean end = false;
 		int customerNumber = 0;
@@ -40,6 +74,10 @@ public class OptionMenu {
 		}
 	}
 
+	public void getAllAcounts(Account acc){
+
+	}
+
 	public void getAccountType(Account acc) {
 		boolean end = false;
 		while (!end) {
@@ -47,7 +85,8 @@ public class OptionMenu {
 				System.out.println("\nSelect the account you want to access: ");
 				System.out.println(" Type 1 - Checking Account");
 				System.out.println(" Type 2 - Savings Account");
-				System.out.println(" Type 3 - Exit");
+				System.out.println(" Type 3 - To View Statements On All Accounts");
+				System.out.println(" Type 4 - Exit");
 				System.out.print("\nChoice: ");
 
 				int selection = menuInput.nextInt();
@@ -60,6 +99,9 @@ public class OptionMenu {
 					getSaving(acc);
 					break;
 				case 3:
+
+					break;
+				case 4:
 					end = true;
 					break;
 				default:
@@ -181,35 +223,4 @@ public class OptionMenu {
 		getLogin();
 	}
 
-	public void mainMenu() throws IOException {
-		data.put(952141, new Account(952141, 191904, 1000, 5000));
-		data.put(123, new Account(123, 123, 20000, 50000));
-		boolean end = false;
-		while (!end) {
-			try {
-				System.out.println("\n Type 1 - Login");
-				System.out.println(" Type 2 - Create Account");
-				System.out.print("\nChoice: ");
-				int choice = menuInput.nextInt();
-				switch (choice) {
-				case 1:
-					getLogin();
-					end = true;
-					break;
-				case 2:
-					createAccount();
-					end = true;
-					break;
-				default:
-					System.out.println("\nInvalid Choice.");
-				}
-			} catch (InputMismatchException e) {
-				System.out.println("\nInvalid Choice.");
-				menuInput.next();
-			}
-		}
-		System.out.println("\nThank You for using this ATM.\n");
-		menuInput.close();
-		System.exit(0);
-	}
 }

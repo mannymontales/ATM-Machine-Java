@@ -1,5 +1,7 @@
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Account {
@@ -11,6 +13,10 @@ public class Account {
 
 	Scanner input = new Scanner(System.in);
 	DecimalFormat moneyFormat = new DecimalFormat("'$'###,##0.00");
+
+	List<Double> otherCheckingBalance = new ArrayList<>();
+
+	List<Double> otherSavingBalance = new ArrayList<>();
 
 	public Account() {
 	}
@@ -26,6 +32,38 @@ public class Account {
 		this.checkingBalance = checkingBalance;
 		this.savingBalance = savingBalance;
 	}
+
+	public Account(int customerNumber, int pinNumber, List<Double> otherCheckingBalance, List<Double> otherSavingBalance) {
+		this.customerNumber = customerNumber;
+		this.pinNumber = pinNumber;
+		this.otherCheckingBalance = otherCheckingBalance;
+		this.otherSavingBalance = otherSavingBalance;
+	}
+
+	public List<Double> getOtherCheckingBalance() {
+		return otherCheckingBalance;
+	}
+
+	public void setOtherCheckingBalance(List<Double> otherCheckingBalance) {
+		this.otherCheckingBalance = otherCheckingBalance;
+	}
+
+	public List<Double> getOtherSavingBalance() {
+		return otherSavingBalance;
+	}
+
+	public Double getValueOfOtherCheckingBalance(int num){
+		return  otherCheckingBalance.get(num);
+	}
+
+	public Double getValueOfOtherSavingBalance(int num){
+		return  otherSavingBalance.get(num);
+	}
+
+	public void setSavingBalance(double savingBalance) {
+		this.savingBalance = savingBalance;
+	}
+
 
 	public int setCustomerNumber(int customerNumber) {
 		this.customerNumber = customerNumber;
@@ -231,5 +269,17 @@ public class Account {
 				input.next();
 			}
 		}
+	}
+
+	@Override
+	public String toString() {
+		return "Account{" +
+				"customerNumber=" + customerNumber +
+				", pinNumber=" + pinNumber +
+				", checkingBalance=" + checkingBalance +
+				", savingBalance=" + savingBalance +
+				", input=" + input +
+				", moneyFormat=" + moneyFormat +
+				'}';
 	}
 }
